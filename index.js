@@ -11,6 +11,19 @@ dotenv.config({
 
 
 connectDB()
+.then(()=>{
+    app.on("error",(error)=>{
+        console.error('there is some error',error)
+        throw error
+    })
+    app.listen(process.env.PORT || 8000,()=>{
+        console.log(`The server is running on port: ${process.env.PORT}`);
+        
+    })
+})
+.catch(error,()=>{
+    console.log(`Failed to connect to DataBase: ${error}`)
+})
 
 
 /*
